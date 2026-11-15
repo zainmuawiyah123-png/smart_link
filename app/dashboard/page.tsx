@@ -9,10 +9,24 @@ export default async function DashboardPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/auth?mode=login");
 
-  const { data: profile, error } = await supabase.from("profiles")
+  let { data: profile, error } = await supabase.from("profiles")
     .select("username,display_name,bio,is_published").eq("id", user.id).maybeSingle();
+
   if (error) throw new Error("تعذر تحميل بيانات الصفحة.");
-  if (!profile) redirect("/auth?mode=signup");
+
+  // A confirmed account may predate profile creation. Create a private starter
+  // profile instead of sending the signed-in user back to the signup screen.
+  if (!profile) {
+    const username = `member_${user.id.replace(/-/g, "").slice(0, 10)}`;
+    const { data: createdProfile, error: createError } = await supabase.from("profiles")
+      .insert({ id: user.id, username, is_published: false })
+      .select("username,display_name,bio,is_published")
+      .single();
+    if (createError || !createdProfile) {
+      throw new Error("تم تسجيل الدخول، لكن تعذر تجهيز صفحتك. يرجى المحاولة مرة أخرى.");
+    }
+    profile = createdProfile;
+  }
 
   const [{ data: links }, { data: products }] = await Promise.all([
     supabase.from("links").select("id,title,url,is_active").eq("user_id", user.id).order("sort_order"),
