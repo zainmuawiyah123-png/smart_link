@@ -9,7 +9,7 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-[#07111f] text-white" dir="rtl">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
         <a href="/" className="text-2xl font-black tracking-tight">Smart<span className="text-cyan-400">Link</span></a>
-        <a href="#features" className="rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold transition hover:border-cyan-300 hover:text-cyan-300">المميزات</a>
+        <div className="flex items-center gap-3"><a href="/auth?mode=login" className="text-sm font-semibold text-slate-300 hover:text-cyan-300">تسجيل الدخول</a><a href="/auth?mode=signup" className="rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-bold text-slate-950">إنشاء حساب</a></div>
       </header>
       <section className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-24 pt-16 md:grid-cols-[1.1fr_.9fr] md:items-center md:pt-24">
         <div className="absolute -right-32 top-0 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
@@ -18,7 +18,7 @@ export default function Home() {
           <h1 className="mt-7 max-w-2xl text-4xl font-black leading-[1.35] tracking-tight sm:text-5xl md:text-6xl">كل ما تريد مشاركته، <span className="text-cyan-300">في رابط واحد.</span></h1>
           <p className="mt-6 max-w-xl text-lg leading-9 text-slate-300">أنشئ صفحة تجمع روابطك ومنتجاتك وخدماتك، وشاركها مع عملائك ومتابعيك بسهولة من أي مكان.</p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <a href="#features" className="rounded-full bg-cyan-400 px-7 py-3.5 font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300">اكتشف المميزات</a>
+            <a href="/auth?mode=signup" className="rounded-full bg-cyan-400 px-7 py-3.5 font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300">ابدأ الآن مجاناً</a>
             <a href="#features" className="rounded-full border border-white/20 px-7 py-3.5 font-semibold transition hover:bg-white/5">اكتشف المميزات</a>
           </div>
           <p className="mt-5 text-xs text-slate-500">روابطك • منتجاتك • خدماتك • تواصلك</p>
