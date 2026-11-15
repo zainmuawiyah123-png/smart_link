@@ -10,7 +10,7 @@ export default async function DashboardPage() {
  if(error) throw new Error("تعذر تحميل بيانات الصفحة.");
  if(!profile){
   const username=`member_${user.id.replace(/-/g,"").slice(0,10)}`;
-  const {data:createdProfile,error:createError}=await supabase.from("profiles").insert({id:user.id,username,is_published:false}).select("username,display_name,bio,country,city,category,is_published").single();
+  const {data:createdProfile,error:createError}=await supabase.from("profiles").insert({id:user.id,username,is_published:false}).select("username,display_name,bio,country,city,category,is_published,referral_code").single();
   if(createError||!createdProfile) throw new Error("تم تسجيل الدخول، لكن تعذر تجهيز صفحتك. يرجى المحاولة مرة أخرى.");
   profile=createdProfile;
  }
