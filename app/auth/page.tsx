@@ -17,6 +17,28 @@ function AuthForm() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+  async function resendConfirmation() {
+    if (!email.trim()) {
+      setError("أدخل بريدك الإلكتروني أولاً.");
+      return;
+    }
+    setBusy(true); setError(""); setMessage("");
+    try {
+      const supabase = createClient();
+      const { error: resendError } = await supabase.auth.resend({
+        type: "signup",
+        email: email.trim(),
+        options: { emailRedirectTo: "https://smart-link-preview.onrender.com/auth/callback?next=%2Fdashboard" },
+      });
+      if (resendError) throw resendError;
+      setMessage("تم طلب إعادة إرسال رسالة التأكيد. افحص الوارد والرسائل غير المرغوب فيها.");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "تعذرت إعادة إرسال رسالة التأكيد.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setBusy(true); setError(""); setMessage("");
@@ -64,7 +86,7 @@ function AuthForm() {
         <label className="block text-sm">البريد الإلكتروني<input type="email" required autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)} className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950 px-4 py-3 outline-none focus:border-cyan-300" /></label>
         <label className="block text-sm">كلمة المرور<input type="password" required minLength={8} autoComplete={mode === "signup" ? "new-password" : "current-password"} value={password} onChange={e=>setPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950 px-4 py-3 outline-none focus:border-cyan-300" /><span className="mt-1 block text-xs text-slate-500">8 أحرف على الأقل</span></label>
         {error && <p role="alert" className="rounded-xl bg-red-400/10 p-3 text-sm text-red-300">{error}</p>}
-        {message && <p role="status" className="rounded-xl bg-emerald-400/10 p-3 text-sm text-emerald-300">{message}</p>}
+        {message && <div role="status" className="rounded-xl bg-emerald-400/10 p-3 text-sm text-emerald-300"><p>{message}</p>{mode === "signup" && <button type="button" onClick={resendConfirmation} disabled={busy} className="mt-3 underline disabled:opacity-60">إعادة إرسال رسالة التأكيد</button>}</div>}
         <button disabled={busy} className="w-full rounded-xl bg-cyan-400 px-5 py-3.5 font-bold text-slate-950 disabled:opacity-60">{busy ? "جارٍ التنفيذ..." : mode === "signup" ? "إنشاء الحساب" : "تسجيل الدخول"}</button>
       </form>
       <button onClick={()=>{setMode(mode==="signup"?"login":"signup");setError("");setMessage("");}} className="mt-5 w-full text-sm text-cyan-300">{mode==="signup"?"لديك حساب؟ سجّل الدخول":"ليس لديك حساب؟ أنشئ حساباً"}</button>
