@@ -13,6 +13,7 @@ function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const referralCode = (search.get("ref") ?? "").trim().toLowerCase();
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -52,7 +53,7 @@ function AuthForm() {
         const { data, error: authError } = await supabase.auth.signUp({
           email: email.trim(),
           password,
-          options: { emailRedirectTo: "https://smart-link-preview.onrender.com/auth/callback?next=%2Fdashboard" },
+          options: { emailRedirectTo: "https://smart-link-preview.onrender.com/auth/callback?next=%2Fdashboard", data: referralCode ? { referral_code: referralCode } : {} },
         });
         if (authError) throw authError;
         if (data.session && data.user) {
