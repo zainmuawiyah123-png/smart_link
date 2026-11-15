@@ -297,7 +297,7 @@ export default async function DashboardPage() {
                     <span className="text-emerald-400 font-bold text-sm">${prod.price}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <a href={prod.whatsappNo ? `https://wa.me/${prod.whatsappNo.replace(/\\D/g, "")}` : "#"} target="_blank" rel="noopener noreferrer" className="text-xs bg-emerald-950 text-emerald-300 px-3 py-1.5 rounded-lg hover:bg-emerald-900 transition">
+                    <a href={prod.whatsappNo ? `https://wa.me/${prod.whatsappNo.replace(/\D/g, "")}` : "#"} target="_blank" rel="noopener noreferrer" className="text-xs bg-emerald-950 text-emerald-300 px-3 py-1.5 rounded-lg hover:bg-emerald-900 transition">
                       الرابط
                     </a>
                     <form action={deleteProduct}>
