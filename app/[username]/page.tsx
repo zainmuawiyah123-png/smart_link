@@ -111,7 +111,7 @@ export default async function PublicProfilePage({
                     </p>
                   </div>
                   <a
-                    href={product.whatsappNo ? `https://wa.me/${product.whatsappNo.replace(/\\D/g, "")}` : "#"}
+                    href={product.whatsappNo ? `https://wa.me/${product.whatsappNo.replace(/\D/g, "")}` : "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`px-5 py-2.5 rounded-xl text-sm transition ${currentTheme.button}`}
