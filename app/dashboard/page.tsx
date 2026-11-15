@@ -261,7 +261,7 @@ export default async function DashboardPage() {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-gray-300">الروابط الحالية ({user?.links.length || 0})</h3>
             <div className="space-y-3">
-              {user?.links.map((link) => (
+              {user?.links.map((link: { id: string; title: string; url: string }) => (
                 <div key={link.id} className="bg-gray-900 border border-gray-800 p-4 rounded-xl flex justify-between items-center">
                   <div className="truncate ml-4">
                     <h4 className="font-medium text-white truncate">{link.title}</h4>
@@ -288,7 +288,7 @@ export default async function DashboardPage() {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-gray-300">المنتجات الحالية ({user?.products.length || 0})</h3>
             <div className="space-y-3">
-              {user?.products.map((prod) => (
+              {user?.products.map((prod: { id: string; title: string; price: number; url: string }) => (
                 <div key={prod.id} className="bg-gray-900 border border-gray-800 p-4 rounded-xl flex justify-between items-center">
                   <div className="truncate ml-4">
                     <h4 className="font-medium text-white truncate">{prod.title}</h4>

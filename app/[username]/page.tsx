@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
-// قاموس الثيمات والألوان المتاحة
 const THEMES: Record<string, { bg: string; card: string; text: string; subtext: string; button: string }> = {
   dark: {
     bg: "bg-gray-950",
@@ -58,14 +57,12 @@ export default async function PublicProfilePage({
     notFound();
   }
 
-  // اختيار الثيم المحفوظ أو الرجوع للوضع الداكن افتراضياً
   const currentTheme = THEMES[user.theme] || THEMES.dark;
 
   return (
     <div className={`min-h-screen ${currentTheme.bg} ${currentTheme.text} py-12 px-4 transition-colors duration-300`} dir="rtl">
       <div className="max-w-xl mx-auto space-y-8">
         
-        {/* البطاقة التعريفية */}
         <div className="text-center space-y-3">
           <div className="w-24 h-24 rounded-full mx-auto bg-gradient-to-tr from-indigo-500 to-sky-400 flex items-center justify-center text-3xl font-bold text-white shadow-lg">
             {user.name ? user.name.charAt(0) : username.charAt(0).toUpperCase()}
@@ -78,10 +75,9 @@ export default async function PublicProfilePage({
           )}
         </div>
 
-        {/* قائمة الروابط */}
         {user.links.length > 0 && (
           <div className="space-y-3">
-            {user.links.map((link) => (
+            {user.links.map((link: { id: string; url: string; title: string }) => (
               <a
                 key={link.id}
                 href={link.url}
@@ -95,14 +91,13 @@ export default async function PublicProfilePage({
           </div>
         )}
 
-        {/* قسم المنتجات والخدمات */}
         {user.products.length > 0 && (
           <div className="space-y-4 pt-4">
             <h2 className={`text-sm font-semibold uppercase tracking-wider text-center ${currentTheme.subtext}`}>
               المنتجات والخدمات
             </h2>
             <div className="grid grid-cols-1 gap-4">
-              {user.products.map((product) => (
+              {user.products.map((product: { id: string; title: string; price: number; url: string }) => (
                 <div
                   key={product.id}
                   className={`p-5 rounded-2xl border flex items-center justify-between transition ${currentTheme.card}`}
