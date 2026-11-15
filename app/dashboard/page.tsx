@@ -237,9 +237,9 @@ export default async function DashboardPage() {
                 <div>
                   <label className="block text-sm text-gray-400 mb-1">رقم واتساب للطلب</label>
                   <input
-                    type="url"
-                    name="url"
-                    placeholder="https://..."
+                    type="tel"
+                    name="whatsappNo"
+                    placeholder="9627XXXXXXXX"
                     required
                     className="w-full bg-gray-950 border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-emerald-500"
                   />
