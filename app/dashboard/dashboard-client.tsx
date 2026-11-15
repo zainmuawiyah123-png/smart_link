@@ -15,7 +15,8 @@ export default function DashboardClient({userId,email,profile,links:initialLinks
  const [displayName,setDisplayName]=useState(profile.display_name??"");
  const [bio,setBio]=useState(profile.bio??"");
  const [title,setTitle]=useState(""), [url,setUrl]=useState("");
- const [productTitle,setProductTitle]=useState(""), [productDescription,setProductDescription]=useState(""), [price,setPrice]=useState(""), [whatsapp,setWhatsapp]=useState("");\n const [productImage,setProductImage]=useState<File|null>(null), [productPreview,setProductPreview]=useState<string>("");
+ const [productTitle,setProductTitle]=useState(""), [productDescription,setProductDescription]=useState(""), [price,setPrice]=useState(""), [whatsapp,setWhatsapp]=useState("");
+ const [productImage,setProductImage]=useState<File|null>(null), [productPreview,setProductPreview]=useState<string>("");
  const [busy,setBusy]=useState(false), [notice,setNotice]=useState(""), [error,setError]=useState("");
  async function run(action:()=>Promise<void>) {setBusy(true);setNotice("");setError("");try{await action();}catch(e){setError(e instanceof Error?e.message:"حدث خطأ غير متوقع / An unexpected error occurred / An unexpected error occurred");}finally{setBusy(false);}}
  async function saveProfile(e:FormEvent){e.preventDefault();await run(async()=>{const {error}=await supabase.from("profiles").update({display_name:displayName.trim()||null,bio:bio.trim()||null,updated_at:new Date().toISOString()}).eq("id",userId);if(error)throw error;setNotice("تم حفظ بيانات الصفحة / Page details saved.");router.refresh();});}
