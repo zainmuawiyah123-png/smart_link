@@ -16,7 +16,7 @@ export default async function DashboardPage() {
  }
  const [{data:links},{data:products},{data:subscription},{data:payments}]=await Promise.all([
   supabase.from("links").select("id,title,url,is_active").eq("user_id",user.id).order("sort_order"),
-  supabase.from("products").select("id,title,description,price,currency,whatsapp_no,is_active").eq("user_id",user.id).order("sort_order"),
+  supabase.from("products").select("id,title,description,price,currency,whatsapp_no,image_url,is_active").eq("user_id",user.id).order("sort_order"),
   supabase.from("subscriptions").select("status,trial_ends_at,paid_until").eq("user_id",user.id).maybeSingle(),
   supabase.from("payment_submissions").select("id,transaction_reference,status,submitted_at").eq("user_id",user.id).order("submitted_at",{ascending:false})
  ]);
