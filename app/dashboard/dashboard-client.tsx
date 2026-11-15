@@ -7,7 +7,7 @@ import PaymentPanel from "./payment-panel";
 
 type LinkRow = { id:string; title:string; url:string; is_active:boolean };
 type ProductRow = { id:string; title:string; description:string|null; price:number; currency:string; whatsapp_no:string|null; image_url:string|null; is_active:boolean };
-type Props = { userId:string; email:string; profile:{username:string;display_name:string|null;bio:string|null;country:string|null;city:string|null;category:string|null;is_published:boolean}; links:LinkRow[]; products:ProductRow[]; subscription:{status:string;trial_ends_at:string;paid_until:string|null}|null; payments:{id:string;transaction_reference:string;status:string;submitted_at:string}[]; referralCount:number };
+type Props = { userId:string; email:string; profile:{username:string;referral_code:string;display_name:string|null;bio:string|null;country:string|null;city:string|null;category:string|null;is_published:boolean}; links:LinkRow[]; products:ProductRow[]; subscription:{status:string;trial_ends_at:string;paid_until:string|null}|null; payments:{id:string;transaction_reference:string;status:string;submitted_at:string}[]; referralCount:number };
 
 export default function DashboardClient({userId,email,profile,links:initialLinks,products:initialProducts,subscription,payments,referralCount}:Props) {
  const supabase=createClient(), router=useRouter();
