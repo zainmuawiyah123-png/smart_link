@@ -1,12 +1,24 @@
-export default function DashboardPage() {
-  return (
-    <main className="flex min-h-screen items-center justify-center bg-[#07111f] px-6 text-white" dir="rtl">
-      <section className="w-full max-w-xl rounded-3xl border border-white/10 bg-white/[0.05] p-8 text-center shadow-2xl">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-400/10 text-2xl text-cyan-300">🔒</div>
-        <h1 className="mt-6 text-2xl font-black">لوحة التحكم قيد التجهيز</h1>
-        <p className="mt-4 leading-8 text-slate-300">نعمل على تجهيز تسجيل الدخول وحماية حساب كل مستخدم وربط بياناته بشكل مستقل. لن نفعّل إدارة الروابط والمنتجات قبل اكتمال هذه الحماية.</p>
-        <a href="/" className="mt-7 inline-flex rounded-full bg-cyan-400 px-6 py-3 font-bold text-slate-950 transition hover:bg-cyan-300">العودة إلى الصفحة الرئيسية</a>
-      </section>
-    </main>
-  );
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import DashboardClient from "./dashboard-client";
+
+export const dynamic = "force-dynamic";
+
+export default async function DashboardPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/auth?mode=login");
+
+  const { data: profile, error } = await supabase.from("profiles")
+    .select("username,display_name,bio,is_published").eq("id", user.id).maybeSingle();
+  if (error) throw new Error("تعذر تحميل بيانات الصفحة.");
+  if (!profile) redirect("/auth?mode=signup");
+
+  const [{ data: links }, { data: products }] = await Promise.all([
+    supabase.from("links").select("id,title,url,is_active").eq("user_id", user.id).order("sort_order"),
+    supabase.from("products").select("id,title,description,price,currency,whatsapp_no,is_active").eq("user_id", user.id).order("sort_order"),
+  ]);
+
+  return <DashboardClient userId={user.id} email={user.email ?? ""} profile={profile}
+    links={links ?? []} products={(products ?? []).map(p => ({...p, price:Number(p.price)}))} />;
 }
