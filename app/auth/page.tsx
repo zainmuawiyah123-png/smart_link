@@ -30,7 +30,7 @@ function AuthForm() {
         const { data, error: authError } = await supabase.auth.signUp({
           email: email.trim(),
           password,
-          options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard` },
+          options: { emailRedirectTo: "https://smart-link-preview.onrender.com/auth/callback?next=%2Fdashboard" },
         });
         if (authError) throw authError;
         if (data.session && data.user) {
