@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 const THEMES: Record<string, { bg: string; card: string; text: string; subtext: string; button: string }> = {
   dark: {
     bg: "bg-gray-950",
@@ -97,7 +99,7 @@ export default async function PublicProfilePage({
               المنتجات والخدمات
             </h2>
             <div className="grid grid-cols-1 gap-4">
-              {user.products.map((product: { id: string; title: string; price: number; url: string }) => (
+              {user.products.map((product) => (
                 <div
                   key={product.id}
                   className={`p-5 rounded-2xl border flex items-center justify-between transition ${currentTheme.card}`}
@@ -109,7 +111,7 @@ export default async function PublicProfilePage({
                     </p>
                   </div>
                   <a
-                    href={product.url}
+                    href={product.whatsappNo ? `https://wa.me/${product.whatsappNo.replace(/\\D/g, "")}` : "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`px-5 py-2.5 rounded-xl text-sm transition ${currentTheme.button}`}
