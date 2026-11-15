@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 export const dynamic = "force-dynamic";
 
 type Profile = { id:string; username:string; display_name:string|null; bio:string|null };
-type Product = { id:string; user_id:string; title:string; description:string|null; price:number|string; currency:string; whatsapp_no:string|null };
+type Product = { id:string; user_id:string; title:string; description:string|null; price:number|string; currency:string; whatsapp_no:string|null; image_url:string|null };
 
 export default async function DiscoverPage({searchParams}:{searchParams:Promise<{q?:string}>}) {
   const {q=""}=await searchParams;
@@ -15,7 +15,7 @@ export default async function DiscoverPage({searchParams}:{searchParams:Promise<
   const owners=(profiles??[]) as Profile[];
   const ids=owners.map(p=>p.id);
   const {data:products,error:productError}=ids.length
-    ? await supabase.from("products").select("id,user_id,title,description,price,currency,whatsapp_no").in("user_id",ids).eq("is_active",true).order("sort_order")
+    ? await supabase.from("products").select("id,user_id,title,description,price,currency,whatsapp_no,image_url").in("user_id",ids).eq("is_active",true).order("sort_order")
     : {data:[],error:null};
   if(productError) throw new Error("تعذر تحميل المنتجات حالياً.");
   const allProducts=(products??[]) as Product[];
@@ -42,7 +42,7 @@ export default async function DiscoverPage({searchParams}:{searchParams:Promise<
       <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{filtered.map(profile=><article key={profile.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="bg-gradient-to-l from-teal-50 to-slate-100 p-5"><div className="flex items-center gap-3"><div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-teal-700 text-xl font-black text-white">{(profile.display_name||profile.username).charAt(0).toUpperCase()}</div><div className="min-w-0"><h3 className="truncate text-lg font-black">{profile.display_name||profile.username}</h3><p className="text-xs text-slate-500">@{profile.username}</p></div></div>{profile.bio&&<p className="mt-3 line-clamp-3 text-sm leading-7 text-slate-600">{profile.bio}</p>}</div>
         <div className="p-5"><p className="mb-3 text-sm font-bold text-slate-700">المنتجات والخدمات ({profile.products.length})</p>
-          {profile.products.length===0?<p className="text-sm text-slate-400">لم تتم إضافة منتجات بعد</p>:<div className="space-y-2">{profile.products.slice(0,3).map(product=><div key={product.id} className="rounded-xl bg-slate-50 p-3"><div className="flex items-start justify-between gap-2"><span className="text-sm font-semibold">{product.title}</span><strong className="whitespace-nowrap text-sm text-teal-700">{Number(product.price).toFixed(2)} {product.currency}</strong></div>{product.description&&<p className="mt-1 line-clamp-2 text-xs text-slate-500">{product.description}</p>}</div>)}</div>}
+          {profile.products.length===0?<p className="text-sm text-slate-400">لم تتم إضافة منتجات بعد</p>:<div className="space-y-2">{profile.products.slice(0,3).map(product=><div key={product.id} className="overflow-hidden rounded-xl bg-slate-50">{product.image_url&&<img src={product.image_url} alt={product.title} loading="lazy" className="h-36 w-full object-cover"/>}<div className="p-3"><div className="flex items-start justify-between gap-2"><span className="text-sm font-semibold">{product.title}</span><strong className="whitespace-nowrap text-sm text-teal-700">{Number(product.price).toFixed(2)} {product.currency}</strong></div>{product.description&&<p className="mt-1 line-clamp-2 text-xs text-slate-500">{product.description}</p>}</div></div>)}</div>}
           <a href={`/${profile.username}`} className="mt-4 block rounded-xl bg-teal-700 px-4 py-3 text-center text-sm font-bold text-white">زيارة الصفحة والتواصل | View page</a>
         </div>
       </article>)}</div>}
