@@ -1,11 +1,11 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
-export default function AuthPage() {
+function AuthForm() {
   const router = useRouter();
   const search = useSearchParams();
   const initialMode = search.get("mode") === "login" ? "login" : "signup";
@@ -71,4 +71,8 @@ export default function AuthPage() {
       <Link href="/" className="mt-6 block text-center text-xs text-slate-500">العودة إلى الصفحة الرئيسية</Link>
     </section>
   </main>;
+}
+
+export default function AuthPage() {
+  return <Suspense fallback={<main dir="rtl" className="flex min-h-screen items-center justify-center bg-[#07111f] text-white">جارٍ التحميل...</main>}><AuthForm /></Suspense>;
 }
