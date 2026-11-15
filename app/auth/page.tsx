@@ -19,7 +19,7 @@ function AuthForm() {
 
   async function resendConfirmation() {
     if (!email.trim()) {
-      setError("أدخل بريدك الإلكتروني أولاً.");
+      setError("أدخل بريدك الإلكتروني أولاً / Enter your email first.");
       return;
     }
     setBusy(true); setError(""); setMessage("");
@@ -31,7 +31,7 @@ function AuthForm() {
         options: { emailRedirectTo: "https://smart-link-preview.onrender.com/auth/callback?next=%2Fdashboard" },
       });
       if (resendError) throw resendError;
-      setMessage("تم طلب إعادة إرسال رسالة التأكيد. افحص الوارد والرسائل غير المرغوب فيها.");
+      setMessage("تم طلب إعادة إرسال رسالة التأكيد. افحص الوارد والرسائل غير المرغوب فيها. / Confirmation email resent. Check inbox and spam.");
     } catch (e) {
       setError(e instanceof Error ? e.message : "تعذرت إعادة إرسال رسالة التأكيد.");
     } finally {
@@ -62,7 +62,7 @@ function AuthForm() {
           if (profileError) throw profileError;
           router.push("/dashboard"); router.refresh();
         } else {
-          setMessage("تم إرسال رسالة تأكيد إلى بريدك الإلكتروني. افتحها لتفعيل الحساب ثم سجّل الدخول.");
+          setMessage("تم إرسال رسالة تأكيد إلى بريدك الإلكتروني. افتحها لتفعيل الحساب ثم سجّل الدخول. / Confirmation email sent. Verify your email, then sign in.");
         }
       } else {
         const { error: authError } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
@@ -83,10 +83,10 @@ function AuthForm() {
         {mode === "signup" && <label className="block text-sm">اسم رابط صفحتك / Your page URL
           <div className="mt-2 flex overflow-hidden rounded-xl border border-slate-200 bg-slate-50"><span className="px-3 py-3 text-slate-500">/</span><input required minLength={3} maxLength={30} value={username} onChange={e=>setUsername(e.target.value)} placeholder="yourname" className="min-w-0 flex-1 bg-transparent px-3 py-3 outline-none" /></div>
         </label>}
-        <label className="block text-sm">البريد الإلكتروني / Email address<input type="email" required autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-cyan-300" /></label>
-        <label className="block text-sm">كلمة المرور / Password<input type="password" required minLength={8} autoComplete={mode === "signup" ? "new-password" : "current-password"} value={password} onChange={e=>setPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-cyan-300" /><span className="mt-1 block text-xs text-slate-500">8 أحرف على الأقل</span></label>
-        {error && <p role="alert" className="rounded-xl bg-red-400/10 p-3 text-sm text-red-300">{error}</p>}
-        {message && <div role="status" className="rounded-xl bg-emerald-400/10 p-3 text-sm text-emerald-300"><p>{message}</p>{mode === "signup" && <button type="button" onClick={resendConfirmation} disabled={busy} className="mt-3 underline disabled:opacity-60">إعادة إرسال رسالة التأكيد</button>}</div>}
+        <label className="block text-sm">البريد الإلكتروني / Email address<input type="email" required autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-teal-400" /></label>
+        <label className="block text-sm">كلمة المرور / Password<input type="password" required minLength={8} autoComplete={mode === "signup" ? "new-password" : "current-password"} value={password} onChange={e=>setPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-teal-400" /><span className="mt-1 block text-xs text-slate-500">8 أحرف على الأقل / At least 8 characters</span></label>
+        {error && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-600">{error}</p>}
+        {message && <div role="status" className="rounded-xl bg-emerald-50 p-3 text-sm text-emerald-700"><p>{message}</p>{mode === "signup" && <button type="button" onClick={resendConfirmation} disabled={busy} className="mt-3 underline disabled:opacity-60">إعادة إرسال رسالة التأكيد / Resend confirmation</button>}</div>}
         <button disabled={busy} className="w-full rounded-xl bg-teal-600 px-5 py-3.5 font-bold text-white disabled:opacity-60">{busy ? "جارٍ التنفيذ..." : mode === "signup" ? "إنشاء الحساب / Create account" : "تسجيل الدخول / Sign in"}</button>
       </form>
       <button onClick={()=>{setMode(mode==="signup"?"login":"signup");setError("");setMessage("");}} className="mt-5 w-full text-sm text-teal-700">{mode==="signup"?"لديك حساب؟ سجّل الدخول / Already registered? Sign in":"ليس لديك حساب؟ أنشئ حساباً / New here? Create an account"}</button>
