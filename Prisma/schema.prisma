@@ -1,0 +1,71 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  username      String    @unique
+  image         String?
+  bio           String?
+  theme         String    @default("default")
+  isPro         Boolean   @default(false)
+  proExpiresAt  DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  links         Link[]
+  products      Product[]
+  analytics     Analytic[]
+
+  @@index([username])
+}
+
+model Link {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  url       String
+  icon      String?
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  clicks    Int      @default(0)
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  description String?
+  price       Float
+  currency    String   @default("JD")
+  image       String?
+  whatsappNo  String?
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Analytic {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  targetId  String?
+  ipHash    String?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId, createdAt])
+}
