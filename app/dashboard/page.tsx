@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
+export const dynamic = "force-dynamic";
+
 // دالة Server Action لتحديث الملف الشخصي والثيم
 async function updateProfile(formData: FormData) {
   "use server";
@@ -59,13 +61,13 @@ async function addProduct(formData: FormData) {
   "use server";
   const title = formData.get("title") as string;
   const price = parseFloat(formData.get("price") as string) || 0;
-  const url = formData.get("url") as string;
+  const whatsappNo = formData.get("whatsappNo") as string;
   const userId = "user_1";
 
-  if (!title || !url) return;
+  if (!title || !whatsappNo) return;
 
   await prisma.product.create({
-    data: { title, price, url, userId },
+    data: { title, price, whatsappNo, userId },
   });
 
   revalidatePath("/dashboard");
@@ -233,7 +235,7 @@ export default async function DashboardPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">رابط الشراء</label>
+                  <label className="block text-sm text-gray-400 mb-1">رقم واتساب للطلب</label>
                   <input
                     type="url"
                     name="url"
@@ -288,14 +290,14 @@ export default async function DashboardPage() {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-gray-300">المنتجات الحالية ({user?.products.length || 0})</h3>
             <div className="space-y-3">
-              {user?.products.map((prod: { id: string; title: string; price: number; url: string }) => (
+              {user?.products.map((prod) => (
                 <div key={prod.id} className="bg-gray-900 border border-gray-800 p-4 rounded-xl flex justify-between items-center">
                   <div className="truncate ml-4">
                     <h4 className="font-medium text-white truncate">{prod.title}</h4>
                     <span className="text-emerald-400 font-bold text-sm">${prod.price}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <a href={prod.url} target="_blank" className="text-xs bg-emerald-950 text-emerald-300 px-3 py-1.5 rounded-lg hover:bg-emerald-900 transition">
+                    <a href={prod.whatsappNo ? `https://wa.me/${prod.whatsappNo.replace(/\\D/g, "")}` : "#"} target="_blank" rel="noopener noreferrer" className="text-xs bg-emerald-950 text-emerald-300 px-3 py-1.5 rounded-lg hover:bg-emerald-900 transition">
                       الرابط
                     </a>
                     <form action={deleteProduct}>
