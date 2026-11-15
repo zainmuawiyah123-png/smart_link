@@ -6,8 +6,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Smart Link | صفحتك الرقمية في رابط واحد",
-  description: "اجمع روابطك ومنتجاتك وخدماتك في صفحة رقمية واحدة سهلة المشاركة.",
+  title: "رابطك | Your Link",
+  description: "صفحتك الرقمية في رابط واحد | Your digital page in one link.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
