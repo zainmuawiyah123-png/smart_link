@@ -102,3 +102,110 @@ body { font-family: Arial, Helvetica, sans-serif; }
   .landing-page > header { margin-top: 10px; padding: 14px; }
   .landing-page > section:first-of-type { padding-top: 52px; padding-bottom: 68px; }
 }
+
+
+/* Shared warm visual identity across auth, dashboard, directory and public pages */
+:root {
+  --yl-ink: #302344;
+  --yl-muted: #756681;
+  --yl-violet: #7c3aed;
+  --yl-magenta: #c026d3;
+  --yl-coral: #ea580c;
+  --yl-line: #eadcf5;
+  --yl-paper: #fffaf5;
+}
+main:not(.landing-page) {
+  background:
+    radial-gradient(ellipse at 8% 8%, rgba(255, 177, 128, .30), transparent 30%),
+    radial-gradient(ellipse at 94% 10%, rgba(190, 164, 255, .30), transparent 32%),
+    linear-gradient(135deg, #fff1df 0%, #fffaf5 52%, #f0e8ff 100%) !important;
+  color: var(--yl-ink) !important;
+}
+main:not(.landing-page) h1,
+main:not(.landing-page) h2,
+main:not(.landing-page) h3 { color: var(--yl-ink); }
+main:not(.landing-page) p { color: var(--yl-muted); }
+main:not(.landing-page) header a:first-child { color: var(--yl-ink) !important; }
+main:not(.landing-page) header a:first-child span { color: var(--yl-violet) !important; }
+
+/* White glass panels and cards */
+main:not(.landing-page) section,
+main:not(.landing-page) article,
+main:not(.landing-page) > div > div.rounded-2xl,
+main:not(.landing-page) > div > div.rounded-2xl.border {
+  border-color: var(--yl-line) !important;
+  box-shadow: 0 14px 36px rgba(80, 48, 100, .09);
+}
+main:not(.landing-page) section.bg-white,
+main:not(.landing-page) article.bg-white { background: rgba(255,255,255,.94) !important; }
+main:not(.landing-page) .bg-slate-50,
+main:not(.landing-page) .bg-slate-50\/70 { background: #fff8f1 !important; }
+main:not(.landing-page) .border-slate-200 { border-color: var(--yl-line) !important; }
+
+/* Consistent violet-to-coral primary actions */
+main:not(.landing-page) button,
+main:not(.landing-page) a.rounded-full,
+main:not(.landing-page) a.rounded-xl.bg-teal-700,
+main:not(.landing-page) a.rounded-xl.bg-teal-600 {
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+main:not(.landing-page) button.bg-teal-600,
+main:not(.landing-page) button.bg-teal-700,
+main:not(.landing-page) a.bg-teal-700,
+main:not(.landing-page) a.bg-teal-600,
+main:not(.landing-page) a.bg-emerald-400 {
+  background: linear-gradient(105deg, var(--yl-violet), var(--yl-magenta) 58%, var(--yl-coral)) !important;
+  color: #fff !important;
+  border: 0 !important;
+  box-shadow: 0 10px 24px rgba(124, 58, 237, .20);
+}
+main:not(.landing-page) button:hover,
+main:not(.landing-page) a.rounded-full:hover,
+main:not(.landing-page) a.rounded-xl:hover { filter: brightness(1.04); transform: translateY(-1px); }
+main:not(.landing-page) .text-teal-700,
+main:not(.landing-page) .text-teal-800 { color: var(--yl-violet) !important; }
+main:not(.landing-page) .text-teal-100,
+main:not(.landing-page) .text-teal-50 { color: #f7efff !important; }
+
+/* Forms */
+main:not(.landing-page) input,
+main:not(.landing-page) textarea,
+main:not(.landing-page) select {
+  border-color: #e5d7ef !important;
+  background-color: #fffdfb !important;
+  color: var(--yl-ink) !important;
+  border-radius: 14px;
+}
+main:not(.landing-page) input:focus,
+main:not(.landing-page) textarea:focus,
+main:not(.landing-page) select:focus {
+  outline: 2px solid rgba(124, 58, 237, .16) !important;
+  border-color: var(--yl-violet) !important;
+}
+
+/* Authentication card */
+main:not(.landing-page) > section.max-w-md {
+  border-color: #eadcf5 !important;
+  background: rgba(255,255,255,.96) !important;
+  box-shadow: 0 24px 70px rgba(80, 48, 100, .16) !important;
+}
+
+/* Directory hero */
+main:not(.landing-page) section.from-teal-800,
+main:not(.landing-page) section[class*="from-teal-800"] {
+  background: linear-gradient(115deg, #51218d 0%, #7c3aed 52%, #c026d3 100%) !important;
+  box-shadow: 0 22px 55px rgba(80, 48, 100, .20);
+}
+main:not(.landing-page) section[class*="from-teal-800"] h1,
+main:not(.landing-page) section[class*="from-teal-800"] p { color: #fff !important; }
+
+/* Public store avatar */
+main:not(.landing-page) .from-cyan-300 {
+  background: linear-gradient(135deg, #7c3aed, #c026d3 58%, #ea580c) !important;
+}
+
+/* Keep small screens comfortable */
+@media (max-width: 640px) {
+  main:not(.landing-page) { padding-top: 28px; padding-bottom: 36px; }
+  main:not(.landing-page) section { border-radius: 22px; }
+}
