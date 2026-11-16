@@ -172,5 +172,10 @@ export default function Home() {
       </div>
     </section>
     <footer className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-7"><span>© {new Date().getFullYear()} رابطك | Your Link</span><span>{c.footer}</span><a href="/about" className="font-semibold text-teal-800">{ar?"عن المنصة والأمان":"About & safety"}</a></footer>
+
+    <a href={`https://wa.me/962795177640?text=${encodeURIComponent(ar ? "مرحباً، أود الاستفسار عن منصة رابطك." : "Hello, I would like to know more about Your Link.")}`} target="_blank" rel="noopener noreferrer" aria-label={ar ? "تواصل معنا عبر واتساب" : "Contact us on WhatsApp"} className="fixed bottom-5 start-5 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 text-sm font-black text-white shadow-xl ring-4 ring-white/80 transition hover:scale-105">
+      <span className="text-xl" aria-hidden="true">◉</span><span>{ar ? "تواصل معنا عبر واتساب" : "Chat with us on WhatsApp"}</span>
+    </a>
+
   </main>;
 }
