@@ -102,17 +102,41 @@ export default function Home() {
         </div>
       </div>
       <div className="relative mx-auto w-full max-w-md">
-        <div className="absolute -inset-5 rounded-[3rem] bg-gradient-to-br from-teal-200/50 to-blue-200/50 blur-2xl"/>
-        <div className="relative rounded-[2.2rem] border border-white/90 bg-white/90 p-4 shadow-2xl">
-          <div className="rounded-[1.7rem] bg-gradient-to-br from-[#e5f6f2] via-[#f2f7ff] to-[#e9efff] p-6 sm:p-7">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[1.7rem] bg-gradient-to-br from-teal-600 to-cyan-700 text-2xl font-black text-white shadow-lg">YL</div>
-            <h2 className="mt-5 text-center text-xl font-black text-slate-900">{c.preview}</h2>
-            <p className="mt-2 text-center text-sm text-slate-500">{c.previewSub}</p>
-            <div className="mt-7 space-y-3">
-              {[c.product1,c.product2,c.product3].map((item,i)=><div key={item} className="flex items-center gap-3 rounded-2xl border border-white bg-white/95 px-4 py-4 text-sm font-bold text-slate-700 shadow-sm"><span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-700">{["▧","↗","⌁"][i]}</span><span>{item}</span><span className="ms-auto text-slate-400">←</span></div>)}
+        <div className="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-teal-200/60 via-cyan-100/50 to-violet-200/60 blur-2xl"/>
+        <div className="relative mx-auto max-w-[310px] rounded-[2.8rem] border-[7px] border-slate-900 bg-slate-950 p-2 shadow-[0_28px_80px_-20px_rgba(15,23,42,.55)]">
+          <div className="overflow-hidden rounded-[2.1rem] bg-[#f7faf9]">
+            <div className="flex items-center justify-between bg-white px-5 py-2 text-[10px] font-bold text-slate-500"><span>9:41</span><span>● ● ●</span></div>
+            <div className="bg-gradient-to-br from-teal-700 to-cyan-700 px-4 pb-5 pt-4 text-center text-white">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-white/70 bg-white/15 text-xl font-black shadow-lg">L</div>
+              <h2 className="mt-2 text-lg font-black">{ar ? "متجر لونا" : "Luna Store"}</h2>
+              <p className="mt-1 text-[10px] text-white/85">{ar ? "اختيارات جميلة لكل يوم" : "Lovely finds for every day"}</p>
+              <div className="mt-3 flex justify-center gap-2 text-[9px] font-bold"><span className="rounded-full bg-white/20 px-3 py-1">{ar ? "منتجاتنا" : "Products"}</span><span className="rounded-full bg-white/20 px-3 py-1">{ar ? "تواصل معنا" : "Contact"}</span></div>
             </div>
-            <div className="mt-4 rounded-2xl bg-teal-700 px-4 py-3.5 text-center text-sm font-bold text-white shadow-lg">{ar?"تواصل مع المشروع":"Contact the business"}</div>
+            <div className="px-3 pb-4 pt-3">
+              <div className="mb-3 flex items-center justify-between"><span className="text-xs font-black text-slate-800">{ar ? "منتجات مميزة" : "Featured products"}</span><span className="text-[9px] font-semibold text-teal-700">{ar ? "عرض الكل" : "View all"}</span></div>
+              <div className="grid grid-cols-2 gap-2.5">
+                <article className="overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=360&auto=format&fit=crop&q=80" alt="Demo handbag" className="h-[104px] w-full object-cover"/>
+                  <div className="p-2 text-start"><p className="text-[10px] font-bold text-slate-800">{ar ? "حقيبة أنيقة" : "Classic handbag"}</p><p className="mt-1 text-[10px] font-black text-teal-700">$24.00</p></div>
+                </article>
+                <article className="overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=360&auto=format&fit=crop&q=80" alt="Demo wristwatch" className="h-[104px] w-full object-cover"/>
+                  <div className="p-2 text-start"><p className="text-[10px] font-bold text-slate-800">{ar ? "ساعة عصرية" : "Modern watch"}</p><p className="mt-1 text-[10px] font-black text-teal-700">$32.00</p></div>
+                </article>
+                <article className="overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=360&auto=format&fit=crop&q=80" alt="Demo sneakers" className="h-[104px] w-full object-cover"/>
+                  <div className="p-2 text-start"><p className="text-[10px] font-bold text-slate-800">{ar ? "حذاء رياضي" : "Everyday sneakers"}</p><p className="mt-1 text-[10px] font-black text-teal-700">$39.00</p></div>
+                </article>
+                <article className="overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=360&auto=format&fit=crop&q=80" alt="Demo bottle" className="h-[104px] w-full object-cover"/>
+                  <div className="p-2 text-start"><p className="text-[10px] font-bold text-slate-800">{ar ? "قارورة أنيقة" : "Daily bottle"}</p><p className="mt-1 text-[10px] font-black text-teal-700">$12.00</p></div>
+                </article>
+              </div>
+              <div className="mt-3 rounded-xl bg-[#25D366] py-2.5 text-center text-[11px] font-black text-white shadow-md">{ar ? "تواصل عبر واتساب" : "Chat on WhatsApp"}</div>
+              <p className="mt-2 text-center text-[8px] text-slate-400">{ar ? "نموذج تجريبي توضيحي" : "Illustrative demo store"}</p>
+            </div>
           </div>
+          <div className="mx-auto mt-1 h-1 w-20 rounded-full bg-slate-500"/>
         </div>
       </div>
     </section>
