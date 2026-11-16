@@ -29,7 +29,7 @@ function AuthForm() {
       const { error: resendError } = await supabase.auth.resend({
         type: "signup",
         email: email.trim(),
-        options: { emailRedirectTo: "https://smart-link-preview.onrender.com/auth/callback?next=%2Fdashboard" },
+        options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=%2Fdashboard` },
       });
       if (resendError) throw resendError;
       setMessage("تم طلب إعادة إرسال رسالة التأكيد. افحص الوارد والرسائل غير المرغوب فيها. / Confirmation email resent. Check inbox and spam.");
@@ -53,7 +53,7 @@ function AuthForm() {
         const { data, error: authError } = await supabase.auth.signUp({
           email: email.trim(),
           password,
-          options: { emailRedirectTo: "https://smart-link-preview.onrender.com/auth/callback?next=%2Fdashboard", data: referralCode ? { referral_code: referralCode } : {} },
+          options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=%2Fdashboard`, data: referralCode ? { referral_code: referralCode } : {} },
         });
         if (authError) throw authError;
         if (data.session && data.user) {
