@@ -63,7 +63,7 @@ function AuthForm() {
           if (profileError) throw profileError;
           router.push("/dashboard"); router.refresh();
         } else {
-          setMessage("تم إرسال رسالة تأكيد إلى بريدك الإلكتروني. افتحها لتفعيل الحساب ثم سجّل الدخول. / Confirmation email sent. Verify your email, then sign in.");
+          setMessage("تم إرسال رسالة التأكيد إلى بريدك. بعد الضغط على رابط التأكيد، سيُفتح حسابك تلقائياً دون الحاجة إلى تسجيل الدخول مرة أخرى. / Confirmation email sent. Click the link to activate your account and you will be signed in automatically.");
         }
       } else {
         const { error: authError } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
