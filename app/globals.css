@@ -2,8 +2,8 @@
 
 :root {
   color-scheme: light;
-  --background: #f7fbff;
-  --foreground: #172b4d;
+  --background: #fff8f0;
+  --foreground: #302344;
 }
 
 @theme inline {
@@ -15,127 +15,89 @@
 
 html, body {
   min-height: 100%;
-  background: #f7fbff !important;
-  color: #172b4d;
+  background: #fff8f0 !important;
+  color: #302344;
 }
 body { font-family: Arial, Helvetica, sans-serif; }
 
-/* Distinct, brighter visual identity for the public landing page */
-body > main {
-  background:
-    radial-gradient(ellipse at 8% 12%, rgba(34, 211, 238, .28) 0, transparent 34%),
-    radial-gradient(ellipse at 92% 20%, rgba(99, 102, 241, .20) 0, transparent 32%),
-    linear-gradient(135deg, #f0fdff 0%, #f8fbff 46%, #f2f4ff 100%) !important;
-  color: #172b4d !important;
-}
-body > main > header {
-  margin-top: 14px;
-  border: 1px solid rgba(255,255,255,.9);
-  border-radius: 22px;
-  background: rgba(255,255,255,.78);
-  box-shadow: 0 12px 35px rgba(39, 76, 119, .08);
-  backdrop-filter: blur(16px);
-}
-body > main > section:first-of-type {
-  padding-top: 76px;
-  padding-bottom: 92px;
-}
-body > main > section:first-of-type > div:first-child > h1 {
-  letter-spacing: -.045em;
-  text-shadow: 0 4px 24px rgba(15, 118, 110, .08);
-}
-body > main > section:first-of-type > div:first-child > h1 span {
-  background: linear-gradient(90deg, #087f8c, #2563eb, #6755c9);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent !important;
-}
-body > main > section:first-of-type > div:nth-child(2) > div:last-child {
-  border: 1px solid rgba(255,255,255,.95);
-  box-shadow: 0 28px 75px rgba(31, 71, 125, .18);
-}
-body > main > section:first-of-type > div:nth-child(2) > div:last-child > div {
-  background: linear-gradient(145deg, #d8fbf5 0%, #e8f2ff 55%, #eeeaff 100%) !important;
-}
-body > main > section#features {
-  border-top: 1px solid rgba(255,255,255,.95);
-  background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(235,246,255,.92)) !important;
-}
-body > main > section#features article {
-  border: 1px solid rgba(180, 207, 230, .65);
-  background: rgba(255,255,255,.94);
-  box-shadow: 0 16px 38px rgba(31, 71, 125, .08);
-}
-body > main > section#features article:hover {
-  box-shadow: 0 24px 48px rgba(31, 71, 125, .15);
-}
-body > main a.rounded-full,
-body > main button.rounded-full {
-  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-}
-body > main a.rounded-full.bg-teal-700 {
-  background: linear-gradient(100deg, #087f8c, #2563eb) !important;
-  box-shadow: 0 12px 25px rgba(37, 99, 235, .22);
-}
-@media (max-width: 640px) {
-  body > main > header { margin: 10px 12px 0; padding: 14px; }
-  body > main > section:first-of-type { padding-top: 48px; padding-bottom: 64px; }
-}
-
-
-/* Landing page redesign: explicit class avoids fragile DOM selectors */
+/* New warm, high-contrast identity for the landing page */
 .landing-page {
   background:
-    radial-gradient(circle at 12% 18%, rgba(20, 184, 166, .34) 0, transparent 27%),
-    radial-gradient(circle at 88% 12%, rgba(59, 130, 246, .27) 0, transparent 30%),
-    linear-gradient(135deg, #dff7f8 0%, #f8fcff 48%, #e8edff 100%) !important;
-  color: #102a43 !important;
+    radial-gradient(ellipse at 8% 12%, rgba(255, 177, 128, .58) 0, transparent 32%),
+    radial-gradient(ellipse at 92% 16%, rgba(190, 164, 255, .55) 0, transparent 34%),
+    linear-gradient(135deg, #fff1df 0%, #fffaf5 48%, #f0e8ff 100%) !important;
+  color: #302344 !important;
 }
 .landing-page > header {
   margin: 16px auto 0;
   width: min(calc(100% - 32px), 1152px);
   padding: 18px 24px;
-  border: 1px solid rgba(255,255,255,.95);
+  border: 1px solid #fff !important;
   border-radius: 24px;
-  background: rgba(255,255,255,.88);
-  box-shadow: 0 16px 42px rgba(25, 70, 110, .12);
+  background: rgba(255, 255, 255, .92) !important;
+  box-shadow: 0 16px 42px rgba(80, 48, 100, .13) !important;
   backdrop-filter: blur(18px);
 }
+.landing-page > header a:first-child { color: #302344 !important; }
+.landing-page > header a:first-child span { color: #7c3aed !important; }
 .landing-page > section:first-of-type {
   padding-top: 88px;
   padding-bottom: 104px;
 }
 .landing-page > section:first-of-type h1 {
-  color: #102a43 !important;
-  text-shadow: 0 5px 24px rgba(13, 148, 136, .12);
+  color: #302344 !important;
+  text-shadow: 0 5px 24px rgba(124, 58, 237, .12);
 }
 .landing-page > section:first-of-type h1 span {
-  background: linear-gradient(100deg, #0f766e 0%, #0284c7 48%, #4f46e5 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
+  background: linear-gradient(100deg, #7c3aed 0%, #c026d3 52%, #ea580c 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
   color: transparent !important;
 }
+.landing-page > section:first-of-type p { color: #65556f !important; }
+.landing-page > section:first-of-type > div:first-child > span {
+  border-color: #f4c7a8 !important;
+  color: #9a3412 !important;
+  background: #fffaf5 !important;
+}
 .landing-page > section:first-of-type > div:nth-child(2) > div:last-child {
-  border: 2px solid rgba(255,255,255,.98);
-  box-shadow: 0 30px 80px rgba(25, 70, 110, .22);
+  border: 2px solid #fff !important;
+  box-shadow: 0 30px 80px rgba(80, 48, 100, .22) !important;
 }
 .landing-page > section:first-of-type > div:nth-child(2) > div:last-child > div {
-  background: linear-gradient(145deg, #c9f4ec 0%, #dceeff 52%, #e4e3ff 100%) !important;
+  background: linear-gradient(145deg, #ffe0c2 0%, #f0dcff 55%, #ffe9e1 100%) !important;
+}
+.landing-page > section:first-of-type > div:nth-child(2) > div:last-child > div > div:first-child {
+  background: linear-gradient(135deg, #7c3aed, #c026d3) !important;
+}
+.landing-page a.rounded-full.bg-teal-700,
+.landing-page button.rounded-full.bg-teal-700 {
+  background: linear-gradient(100deg, #7c3aed, #c026d3 58%, #ea580c) !important;
+  color: #fff !important;
+  box-shadow: 0 14px 30px rgba(124, 58, 237, .28) !important;
+}
+.landing-page a[href="#features"] {
+  border-color: #e8d5f5 !important;
+  color: #6b21a8 !important;
+  background: #fff !important;
 }
 .landing-page > section#features {
-  background: linear-gradient(180deg, #ffffff 0%, #eaf5ff 100%) !important;
-  border-top: 2px solid rgba(255,255,255,.98);
+  background: linear-gradient(180deg, #fffdfb 0%, #f4edff 100%) !important;
+  border-top: 2px solid #fff !important;
 }
+.landing-page > section#features > div > p { color: #7c3aed !important; }
+.landing-page > section#features h2,
+.landing-page > section#features h3 { color: #302344 !important; }
 .landing-page > section#features article {
-  background: #ffffff !important;
-  border: 1px solid #c8e1ef;
-  box-shadow: 0 18px 44px rgba(25, 70, 110, .11);
+  background: #fff !important;
+  border: 1px solid #eadcf5 !important;
+  box-shadow: 0 18px 44px rgba(80, 48, 100, .11) !important;
 }
-.landing-page a.rounded-full.bg-teal-700 {
-  background: linear-gradient(100deg, #0f766e, #2563eb) !important;
-  box-shadow: 0 14px 30px rgba(37, 99, 235, .28);
+.landing-page > section#features article > span {
+  background: #f3e8ff !important;
+  color: #7c3aed !important;
 }
-.landing-page footer { color: #47627a; }
+.landing-page footer { color: #766783 !important; }
 @media (max-width: 640px) {
   .landing-page > header { margin-top: 10px; padding: 14px; }
   .landing-page > section:first-of-type { padding-top: 52px; padding-bottom: 68px; }
