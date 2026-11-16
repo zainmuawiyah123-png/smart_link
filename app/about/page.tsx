@@ -19,13 +19,13 @@ export default function AboutPage() {
     ["هل أحتاج إلى كلمة مرور حساباتي الاجتماعية؟", "لا تدخل كلمات مرور حساباتك على إنستغرام أو فيسبوك أو غيرها في رابطك. أضف روابط صفحاتك العامة فقط."],
     ["هل أشارك رمز التحقق أو كلمة المرور مع أحد؟", "لا. لا تشارك كلمة مرورك أو رمز التحقق الذي يصلك عبر البريد أو الهاتف مع أي شخص، حتى لو ادعى أنه من فريق الدعم."],
     ["هل أحتاج إلى الدفع حتى أتصفح المنصة؟", "يمكنك زيارة الصفحات العامة والتعرف على المنصة. إنشاء الصفحة يبدأ بفترة تجربة مجانية مدتها 7 أيام، ثم دولار أمريكي واحد شهرياً لكل صفحة. الدفع المتاح حالياً عبر CliQ يراجعه مدير المنصة."],
-    ["كيف أتأكد أنني في الموقع الصحيح؟", "تحقق من ظهور العنوان smart-link-preview.onrender.com في شريط المتصفح، وتأكد من وجود HTTPS ورمز القفل. إذا ظهر عنوان مختلف أو طلبت منك رسالة غير متوقعة بيانات حساسة، توقف ولا تكمل."],
+    ["كيف أتأكد أنني في الموقع الصحيح؟", "تحقق من اسم النطاق الرسمي الذي تستخدمه، وتأكد من وجود HTTPS ورمز القفل. إذا ظهر عنوان مختلف أو طلبت منك رسالة غير متوقعة بيانات حساسة، توقف ولا تكمل."],
   ] : [
     ["Do I have to open a link immediately?", "No. Read this page and check the website address first. Use the official address shown here; avoid shortened links or links from accounts you do not trust."],
     ["Do I need to provide my social-media passwords?", "No. Do not enter your Instagram, Facebook or other social account passwords on Your Link. Add public profile links only."],
     ["Should I share a password or verification code?", "Never share your password or any email or phone verification code with anyone, even if they claim to be support."],
     ["Do I have to pay just to browse?", "You can visit public pages and learn about the platform. Creating a page starts with a 7-day free trial, then costs USD $1 per page per month. CliQ payments are currently reviewed by the platform manager."],
-    ["How can I check that I am on the right website?", "Check that your browser address shows smart-link-preview.onrender.com and uses HTTPS. If the address is different or an unexpected message asks for sensitive information, stop."],
+    ["How can I check that I am on the right website?", "Check that your browser shows the official Your Link domain and uses HTTPS. If the address is different or an unexpected message asks for sensitive information, stop."],
   ];
   return <main dir={ar ? "rtl" : "ltr"} lang={language} className="min-h-screen px-5 py-8 sm:px-7">
     <div className="mx-auto max-w-5xl">
@@ -85,8 +85,8 @@ export default function AboutPage() {
       </section>
 
       <section className="mt-8 rounded-3xl bg-white/90 p-6 text-center shadow-lg">
-        <p className="text-sm font-bold text-violet-700">{ar ? "العنوان الرسمي للمعاينة" : "Official preview address"}</p>
-        <p dir="ltr" className="mt-2 break-all text-lg font-black text-[#302344]">https://smart-link-preview.onrender.com</p>
+        <p className="text-sm font-bold text-violet-700">{ar ? "عنوان الموقع الرسمي" : "Official website address"}</p>
+        <p dir="ltr" className="mt-2 break-all text-lg font-black text-[#302344]">{window.location.origin}</p>
         <p className="mt-3 text-sm text-[#756681]">{ar ? "7 أيام تجربة مجانية، ثم 1 دولار أمريكي شهرياً لكل صفحة." : "7-day free trial, then USD $1 per page per month."}</p>
         <a href="/auth?mode=signup" className="mt-5 inline-flex rounded-full bg-gradient-to-r from-violet-700 via-fuchsia-600 to-orange-600 px-7 py-3.5 font-bold text-white shadow-lg">{ar ? "ابدأ إنشاء صفحتك" : "Create your page"}</a>
       </section>
