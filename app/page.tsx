@@ -36,7 +36,7 @@ export default function Home() {
     ],
     footer:"Your digital page in one link"
   };
-  return <main dir={ar ? "rtl" : "ltr"} lang={language} className="min-h-screen overflow-hidden bg-gradient-to-br from-cyan-100 via-sky-50 to-indigo-100 text-slate-800">
+  return <main dir={ar ? "rtl" : "ltr"} lang={language} className="landing-page min-h-screen overflow-hidden text-slate-800">
     <header className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-7">
       <a href="/" className="text-2xl font-black tracking-tight text-slate-900">رابطك <span className="text-teal-700">| Your Link</span></a>
       <nav className="flex flex-wrap items-center gap-3">
