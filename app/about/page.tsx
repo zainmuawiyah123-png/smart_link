@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AboutPage() {
   const [language, setLanguage] = useState<"ar" | "en">("ar");
+  const [origin, setOrigin] = useState("");
+  useEffect(() => { setOrigin(window.location.origin); }, []);
   const ar = language === "ar";
   const sections = ar ? [
     { n: "01", title: "ما هو رابطك؟", body: "رابطك منصة تساعد أصحاب المتاجر والمشاريع والخدمات على إنشاء صفحة رقمية تجمع المنتجات والخدمات والروابط وطرق التواصل في مكان واحد." },
@@ -86,7 +88,7 @@ export default function AboutPage() {
 
       <section className="mt-8 rounded-3xl bg-white/90 p-6 text-center shadow-lg">
         <p className="text-sm font-bold text-violet-700">{ar ? "عنوان الموقع الرسمي" : "Official website address"}</p>
-        <p dir="ltr" className="mt-2 break-all text-lg font-black text-[#302344]">{window.location.origin}</p>
+        <p dir="ltr" className="mt-2 break-all text-lg font-black text-[#302344]">{origin || "smart-link-live.onrender.com"}</p>
         <p className="mt-3 text-sm text-[#756681]">{ar ? "7 أيام تجربة مجانية، ثم 1 دولار أمريكي شهرياً لكل صفحة." : "7-day free trial, then USD $1 per page per month."}</p>
         <a href="/auth?mode=signup" className="mt-5 inline-flex rounded-full bg-gradient-to-r from-violet-700 via-fuchsia-600 to-orange-600 px-7 py-3.5 font-bold text-white shadow-lg">{ar ? "ابدأ إنشاء صفحتك" : "Create your page"}</a>
       </section>
