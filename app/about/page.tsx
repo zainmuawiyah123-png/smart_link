@@ -91,6 +91,11 @@ export default function AboutPage() {
         <a href="/auth?mode=signup" className="mt-5 inline-flex rounded-full bg-gradient-to-r from-violet-700 via-fuchsia-600 to-orange-600 px-7 py-3.5 font-bold text-white shadow-lg">{ar ? "ابدأ إنشاء صفحتك" : "Create your page"}</a>
       </section>
 
+
+      <a href={`https://wa.me/962795177640?text=${encodeURIComponent(ar ? "مرحباً، أود الاستفسار عن منصة رابطك." : "Hello, I would like to know more about Your Link.")}`} target="_blank" rel="noopener noreferrer" aria-label={ar ? "تواصل معنا عبر واتساب" : "Contact us on WhatsApp"} className="fixed bottom-5 start-5 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 text-sm font-black text-white shadow-xl ring-4 ring-white/80 transition hover:scale-105">
+        <span className="text-xl" aria-hidden="true">◉</span><span>{ar ? "تواصل معنا عبر واتساب" : "Chat with us on WhatsApp"}</span>
+      </a>
+
       <footer className="py-8 text-center text-sm text-[#756681]">© {new Date().getFullYear()} رابطك | Your Link</footer>
     </div>
   </main>;
