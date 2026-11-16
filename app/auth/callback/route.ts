@@ -3,6 +3,10 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
+  // Render may expose its internal bind address (0.0.0.0:10000) to the
+  // application. Never use that internal origin for browser redirects.
+  const siteOrigin =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://smart-link-live.onrender.com";
   const code = url.searchParams.get("code");
   const requestedNext = url.searchParams.get("next") ?? "/dashboard";
   const next = requestedNext.startsWith("/") && !requestedNext.startsWith("//")
@@ -10,18 +14,18 @@ export async function GET(request: NextRequest) {
     : "/dashboard";
 
   if (!code) {
-    return NextResponse.redirect(new URL("/auth?mode=login&error=confirmation", url.origin));
+    return NextResponse.redirect(new URL("/auth?mode=login&error=confirmation", siteOrigin));
   }
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!supabaseUrl || !supabaseKey) {
-    return NextResponse.redirect(new URL("/auth?mode=login&error=configuration", url.origin));
+    return NextResponse.redirect(new URL("/auth?mode=login&error=configuration", siteOrigin));
   }
 
   // Create the final redirect response first so Supabase session cookies are
   // written onto the same response that the browser receives.
-  const response = NextResponse.redirect(new URL(next, url.origin));
+  const response = NextResponse.redirect(new URL(next, siteOrigin));
   const supabase = createServerClient(supabaseUrl, supabaseKey, {
     cookies: {
       getAll() {
@@ -38,7 +42,7 @@ export async function GET(request: NextRequest) {
 
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
   if (error || !data.user) {
-    return NextResponse.redirect(new URL("/auth?mode=login&error=confirmation", url.origin));
+    return NextResponse.redirect(new URL("/auth?mode=login&error=confirmation", siteOrigin));
   }
 
   const { data: profile } = await supabase
