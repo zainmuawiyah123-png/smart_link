@@ -90,6 +90,7 @@ function AuthForm() {
         {message && <div role="status" className="rounded-xl bg-emerald-50 p-3 text-sm text-emerald-700"><p>{message}</p>{mode === "signup" && <button type="button" onClick={resendConfirmation} disabled={busy} className="mt-3 underline disabled:opacity-60">إعادة إرسال رسالة التأكيد / Resend confirmation</button>}</div>}
         <button disabled={busy} className="w-full rounded-xl bg-teal-600 px-5 py-3.5 font-bold text-white disabled:opacity-60">{busy ? "جارٍ التنفيذ..." : mode === "signup" ? "إنشاء الحساب / Create account" : "تسجيل الدخول / Sign in"}</button>
       </form>
+      {mode === "login" && <Link href="/auth/forgot-password" className="mt-4 block text-center text-sm font-semibold text-teal-700 underline">نسيت كلمة المرور؟ / Forgot password?</Link>}
       <button onClick={()=>{setMode(mode==="signup"?"login":"signup");setError("");setMessage("");}} className="mt-5 w-full text-sm text-teal-700">{mode==="signup"?"لديك حساب؟ سجّل الدخول / Already registered? Sign in":"ليس لديك حساب؟ أنشئ حساباً / New here? Create an account"}</button>
       <Link href="/" className="mt-6 block text-center text-xs text-slate-500">العودة إلى الصفحة الرئيسية / Back to home</Link>
     </section>
